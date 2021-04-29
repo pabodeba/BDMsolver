@@ -10,9 +10,8 @@ from BDMsolver_ExperimentE1 import *
 
 def createPlotData(case):
     #load mesh and boundary data
-    GeoFolder = "./Geometries"
-    mesh = Mesh(GeoFolder+"/"+case+".xml")
-    boundaries = MeshFunction("size_t", mesh, GeoFolder+"/"+case+"_facet_region.xml")
+    mesh = Mesh(case+".xml")
+    boundaries = MeshFunction("size_t", mesh, case+"_facet_region.xml")
 
     #create solution of Stokes Problem
     z = Stokes(mesh, boundaries)
@@ -74,11 +73,11 @@ for i in range(len(u1Oga)):
 
 #plot tau for BDM solver an different mesh resolutions 
 ##    ATTENTION  mesh size 5 is computationally expensive
-tau_data20 = createPlotData('ExperimentE_20')
+tau_data20 = createPlotData('mesh_E_20')
 plt.plot([x[0]/1000.0 for x in tau_data20],[x[1]/1000.0 for x in tau_data20], label = 'BDM; h=20m')
-tau_data10 = createPlotData('ExperimentE_10')
+tau_data10 = createPlotData('mesh_E_10')
 plt.plot([x[0]/1000.0 for x in tau_data10],[x[1]/1000.0 for x in tau_data10], label = 'BDM; h=10m')
-#tau_data5 = createPlotData('ExperimentE_5')
+#tau_data5 = createPlotData('mesh_E_5')
 #plt.plot([x[0]/1000.0 for x in tau_data5],[x[1]/1000.0 for x in tau_data5], label = 'BDM; h=5m')
 
 #plot 'oga' data
