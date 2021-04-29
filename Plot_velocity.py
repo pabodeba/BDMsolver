@@ -11,11 +11,10 @@ from BDMsolver_ExperimentE1 import *
 ################Create Experiment solution#################
 ############################################################
 #Load meshe and boundary
-case = "ExperimentE_20"
-GeoFolder = "./Geometries"
+case = "mesh_E_20"
 
-mesh = Mesh(GeoFolder+"/"+case+".xml")
-boundaries = MeshFunction("size_t", mesh, GeoFolder+"/"+case+"_facet_region.xml")
+mesh = Mesh(case+".xml")
+boundaries = MeshFunction("size_t", +case+"_facet_region.xml")
 
 z = Stokes(mesh, boundaries)
 w = z.solving()
