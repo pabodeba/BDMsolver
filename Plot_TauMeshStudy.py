@@ -27,14 +27,14 @@ def createPlotData(case):
     
     #extract shear stress at the bottom
     daten = []
-    dofmap = C.dofmap()
-    for f in facets(mesh):
-        if boundaries[f.index()] == 1:  
-            c = list(cells(f))[0]
-            c2d = dofmap.cell_dofs(c.index())
-            v = var_proj.vector()[c2d][0]
+    dofmap = C.dofmap()     #map of dofs (dofmap is a class)
+    for f in facets(mesh):      #for each facet of the mesh
+        if boundaries[f.index()] == 1:      #check if the facet belongs to the bottom boundary
+            c = list(cells(f))[0]       #list of cells at the facet
+            c2d = dofmap.cell_dofs(c.index())       #acccessing dof indices of cell 
+            v = var_proj.vector()[c2d][0]   #
             x = 0.0  #f.mid_point()
-            for vert in vertices(f): # Two vertices for each facet. For each vertex
+            for vert in vertices(f): # for each vertex at the facet (there are two vertices for each facet)
                 x = x + vert.x(0)   # vertex_1 x-coordinate+ vertex_2 x-coordinate / 2
             x = x/2.0
             daten.append((x,v)) #append facet midpoint and the value
